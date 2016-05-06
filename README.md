@@ -1,5 +1,5 @@
-JS Web Template
-===============
+JS Start Project
+================
 
 Starter project for JavaScript web applications.
 
@@ -17,3 +17,7 @@ Front-end only stack which uses webpack for task automation, module bundling and
 - React
 - React-router
 - Babel
+
+### Usage
+
+Copy this repository into a new folder on your computer (exclude the `.git` folder) and start coding!
