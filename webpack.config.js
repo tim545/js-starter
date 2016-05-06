@@ -3,7 +3,8 @@ var path = require('path');
 module.exports = {
   entry: {},
   output: {
-    path: path.join( __dirname, 'dist' )
+    path: path.join( __dirname, 'dist' ),
+    filename: 'app.js'
   },
   module: {
     loaders: [
@@ -24,6 +25,10 @@ module.exports = {
         test: /.*\/app\/.*\.js$/,
         exclude: /.spec.js/,
         loader: "uglify"
+      },
+      {
+        test: /src\/assets\/styles\/style\.scss$/,
+        loaders: ["style", "css", "sass"]
       }
     ]
   }

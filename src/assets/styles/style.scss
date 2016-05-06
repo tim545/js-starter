@@ -1,8 +1,14 @@
+// Third party
+@import 'third_party/bootstrap.css';
+
 // Base
 @import 'base.scss';
 
 // Shared
+@import 'shared/variables.scss';
+@import 'shared/mixins.scss';
 
 // Layout
+@import 'shared/layout_base.scss';
 
 // Components
