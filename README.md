@@ -1,5 +1,5 @@
-JS Start Project
-================
+JS Starter Project
+==================
 
 Starter project for JavaScript web applications.
 
