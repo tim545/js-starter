@@ -1,5 +1,5 @@
 // Third party
-@import 'third_party/bootstrap.css';
+@import 'third_party/bootstrap.min';
 
 // Base
 @import 'base.scss';
@@ -9,6 +9,6 @@
 @import 'shared/mixins.scss';
 
 // Layout
-@import 'shared/layout_base.scss';
+@import 'layout/base.scss';
 
 // Components
