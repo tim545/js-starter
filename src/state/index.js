@@ -1,6 +1,12 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import sample from './sample/sample';
 
-export const reducer = combineReducers({});
+let middleware = [];
+let createStoreWithMiddleware = applyMiddleware.apply(null, middleware);
+
+export const reducer = combineReducers({
+  sample
+});
 
 export function createReduxStore(initialState = {}) {
   if (
