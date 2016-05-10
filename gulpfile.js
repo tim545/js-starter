@@ -38,14 +38,14 @@ gulp.task('jsDependencies', ()=> {
 });
 
 gulp.task('lint', ()=> {
-  return gulp.src(['src/index.js', 'src/components/**/*.js', 'src/state/**/*.js'])
+  return gulp.src(['src/**/*.js', 'src/**/*.jsx', '!src/dependencies/**.*'])
   .pipe(plugins.eslint())
   .pipe(plugins.eslint.format())
   .pipe(plugins.eslint.failAfterError());
 });
 
 gulp.task('concat', ()=> {
-  return gulp.src(['src/components/**/*.jsx', 'src/state/**/*.js', 'src/index.js'])
+  return gulp.src(['src/containers/**/*.js', 'src/components/**/*.jsx', 'src/state/**/*.js', 'src/index.js'])
   .pipe(plugins.concat('app.js'))
   .pipe(gulp.dest('dist'));
 });

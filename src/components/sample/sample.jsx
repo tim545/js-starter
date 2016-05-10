@@ -4,4 +4,4 @@ const Sample = ()=> {
   return (
     <p>sample component</p>
   );
-}
+};
