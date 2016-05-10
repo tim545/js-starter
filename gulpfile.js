@@ -44,10 +44,15 @@ gulp.task('lint', ()=> {
   .pipe(plugins.eslint.failAfterError());
 });
 
-gulp.task('babel', ['lint'], ()=> {
-  return gulp.src(['src/index.js', 'src/components/**/*.js', 'src/state/**/*.js'])
-  .pipe(plugins.babel())
+gulp.task('concat', ()=> {
+  return gulp.src(['src/components/**/*.jsx', 'src/state/**/*.js', 'src/index.js'])
   .pipe(plugins.concat('app.js'))
+  .pipe(gulp.dest('dist'));
+});
+
+gulp.task('babel', ['lint', 'concat'], ()=> {
+  return gulp.src('dist/app.js')
+  .pipe(plugins.babel())
   .pipe(gulp.dest('dist'));
 });
 
@@ -66,8 +71,8 @@ gulp.task('server', ['minify'], ()=> {
   }));
 });
 
-gulp.task('start', ['clean', 'jade', 'sass', 'jsDependencies', 'lint', 'babel', 'minify', 'server']);
-gulp.task('update', ['jade', 'sass', 'lint', 'babel', 'minify'])
+gulp.task('start', ['clean', 'jade', 'sass', 'jsDependencies', 'concat', 'lint', 'babel', 'minify', 'server']);
+gulp.task('update', ['jade', 'sass', 'concat', 'lint', 'babel', 'minify']);
 
 gulp.task('default', ['start']);
-gulp.watch('src/**.*', ['update']);
+gulp.watch('src/**/*.*', ['update']);

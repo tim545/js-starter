@@ -1,14 +1,16 @@
 
 const Component = React.Component;
 const render = ReactDOM.render;
-const appContiner = document.getElementById('app');
 
 class App extends Component {
   render() {
     return (
-      <p>This is the app.</p>
+      <div>
+        <p>This is the app.</p>
+        <Sample/>
+      </div>
     );
   }
 }
 
-render(<App />, appContiner);
+render(<App/>, document.getElementById('app'));
