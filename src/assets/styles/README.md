@@ -13,4 +13,4 @@ Selections should be only _class selectors_, id's and attributes are for JavaScr
 
 If you are adding a new Sass file to `src/assets/styles` you will need to reference the file in `src/assets/styles/style.scss` for it to load. We have three directories to organize the respective files: layout, sections, and shared. If you are adding a new file you are likely adding it to `sections`.
 
-Check [our styleguide](https://github.com/Automattic/wp-calypso/blob/master/docs/coding-guidelines/css.md) for more information on how we use Sass.
+Check the [Calypso styleguide](https://github.com/Automattic/wp-calypso/blob/master/docs/coding-guidelines/css.md), all styles should be written to match this.

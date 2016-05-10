@@ -7,16 +7,16 @@ Inspired by [Calypso](https://github.com/Automattic/wp-calypso)
 
 ### At a Glance
 
-Front-end only stack which uses webpack for task automation, module bundling and development server. Fully written in es6 using web components (React).
+Front-end only stack which uses [GulpJs](gulpjs.com) for task automation, module bundling and development server. Fully written in ES6 using web components (React).
 
 **Stack:**
 
-- NodeJs
-- Webpack
+- GulpJs
 - Redux
 - React
 - React-router
-- Babel
+- Babel(ES2015)
+- Sass
 
 ### Usage
 
