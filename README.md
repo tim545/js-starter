@@ -12,9 +12,11 @@ Front-end only stack which uses [GulpJs](gulpjs.com) for task automation, module
 **Stack:**
 
 - GulpJs
+- Browserify
 - Redux
 - React
 - React-router
+- React-bootstrap
 - Babel(ES2015)
 - Sass
 
