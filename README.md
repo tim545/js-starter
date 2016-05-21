@@ -23,3 +23,7 @@ Front-end only stack which uses [GulpJs](gulpjs.com) for task automation, module
 ### Usage
 
 Copy this repository into a new folder on your computer (exclude the `.git` folder) and start coding!
+
+### Getting Started
+
+Use `npm run init` to install all the dependencies and start the dev server, in the future use `npm start` instead.
