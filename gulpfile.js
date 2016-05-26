@@ -37,18 +37,21 @@ const tasks = {};
 
 tasks.jade = ()=> {
   gulp.src('dist/index.html')
-  .pipe(plugins.clean({force: true}));
+  .pipe(plugins.clean({force: true}))
+  .on('error', gulpUtil.log);
 
-  gulp.src('src/index.jade')
+  return gulp.src('src/index.jade')
   .pipe(plugins.jade())
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('dist'))
+  .on('error', gulpUtil.log);
 };
 
 tasks.sass = ()=> {
   gulp.src('dist/style.css')
-  .pipe(plugins.clean({force: true}));
+  .pipe(plugins.clean({force: true}))
+  .on('error', gulpUtil.log);
 
-  gulp.src('src/styles/style.scss')
+  return gulp.src('src/styles/style.scss')
   .pipe(plugins.sass({outputStyle: 'compressed'}))
   .on('error', plugins.sass.logError)
   .pipe(gulp.dest('dist'));
@@ -56,7 +59,8 @@ tasks.sass = ()=> {
 
 tasks.jsDependencies = ()=> {
   gulp.src('dist/app-dependencies.js')
-  .pipe(plugins.clean({force: true}));
+  .pipe(plugins.clean({force: true}))
+  .on('error', gulpUtil.log);
 
   const deps = browserify();
   jsDependencies.map(dep=> {
@@ -64,13 +68,14 @@ tasks.jsDependencies = ()=> {
   });
   deps.transform('envify');
 
-  deps.bundle()
+  return deps.bundle()
   .pipe(source('app-dependencies.js'))
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('dist'))
+  .on('error', gulpUtil.log);
 };
 
 tasks.lint = ()=> {
-  gulp.src([
+  return gulp.src([
     'src/**/*.js',
     'src/**/*.jsx'
   ])
@@ -78,12 +83,14 @@ tasks.lint = ()=> {
     configFile: '.eslintrc'
   }))
   .pipe(plugins.eslint.format())
-  .pipe(plugins.eslint.failAfterError());
+  .pipe(plugins.eslint.failAfterError())
+  .on('error', gulpUtil.log);
 };
 
 tasks.jsApp = ()=> {
   gulp.src('dist/app.js')
-  .pipe(plugins.clean({force: true}));
+  .pipe(plugins.clean({force: true}))
+  .on('error', gulpUtil.log);
 
   const app = browserify('src/index.js', {
     transform: ['babelify', 'reactify']
@@ -92,45 +99,43 @@ tasks.jsApp = ()=> {
     app.external(dep);
   });
 
-  app.bundle()
+  return app.bundle()
   .pipe(source('app.js'))
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('dist'))
+  .on('error', gulpUtil.log);
 };
 
 tasks.babel = ()=> {
-  gulp.src('dist/app.js')
+  return gulp.src('dist/app.js')
   .pipe(plugins.babel())
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('dist'))
+  .on('error', gulpUtil.log);
 };
 
 tasks.minifyApp = ()=> {
   gulp.src('dist/app-min.js')
-  .pipe(plugins.clean({force: true}));
+  .pipe(plugins.clean({force: true}))
+  .on('error', gulpUtil.log);
 
-  gulp.src(['dist/app.js'])
+  return gulp.src(['dist/app.js'])
   .pipe(plugins.minify({mangle:false}))
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('dist'))
+  .on('error', gulpUtil.log);
 };
 
 tasks.minifyDeps = ()=> {
   gulp.src('dist/app-dependencies-min.js')
-  .pipe(plugins.clean({force: true}));
+  .pipe(plugins.clean({force: true}))
+  .on('error', gulpUtil.log);
 
-  gulp.src(['dist/app-dependencies.js'])
+  return gulp.src(['dist/app-dependencies.js'])
   .pipe(plugins.minify({mangle:false}))
-  .pipe(gulp.dest('dist'));
-};
-
-tasks.locale = ()=> {
-  gulp.src('dist/locale/**/*.json')
-  .pipe(plugins.clean({force: true}));
-
-  gulp.src('src/locale/**/*.json')
-  .pipe(gulp.dest('dist/locale'));
+  .pipe(gulp.dest('dist'))
+  .on('error', gulpUtil.log);
 };
 
 tasks.server = ()=> {
-  gulp.src(path.join(__dirname, 'dist'))
+  return gulp.src(path.join(__dirname, 'dist'))
   .pipe(plugins.server({
     livereload: true,
     open: true,
@@ -146,23 +151,14 @@ gulp.task('jsApp', ()=> tasks.jsApp());
 gulp.task('babel', ['lint', 'jsApp'], ()=> tasks.babel());
 gulp.task('minifyApp', ['babel'], ()=> tasks.minifyApp());
 gulp.task('minifyDeps', ['jsDependencies'], ()=> tasks.minifyDeps());
-gulp.task('locale', ()=> tasks.locale());
 gulp.task('server', ['minifyApp', 'minifyDeps'], ()=> tasks.server());
 
 if (process.env.NODE_ENV === undefined) {
   process.env.NODE_ENV = 'production';
 }
 
-gulp.task('start', ['jade', 'sass', 'jsDependencies', 'jsApp', 'lint', 'babel', 'minifyDeps', 'minifyApp', 'locale', 'server', 'watch']);
-gulp.task('watch', ()=> {
-  gulp.watch('src/styles/*.scss', ['sass']);
-  gulp.watch([
-    'src/components/*.jsx',
-    'src/containers/*.js',
-    'src/state/*.js',
-    'src/middleware/*.js',
-    'src/*.js'
-  ], ['jsApp']);
-  gulp.watch('src/locale/*.json', ['locale']);
-});
+gulp.task('start', ['jade', 'sass', 'jsDependencies', 'jsApp', 'lint', 'babel', 'minifyDeps', 'minifyApp', 'server']);
+gulp.task('update', ['jade', 'sass', 'jsApp', 'lint', 'babel', 'minifyApp']);
+
 gulp.task('default', ['start']);
+gulp.watch('src/**/*.*', ['update']);

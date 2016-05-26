@@ -4,6 +4,10 @@
 node_modules
 .eslintcache
 
-/dist
+dist/*.*
+!dist/locale/**
+!dist/static/**
 
 .npm-debug.log
+
+coverage

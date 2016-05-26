@@ -7,7 +7,20 @@ import {renderApp} from './render.jsx';
 
 const store = createReduxStore();
 
+const init = ()=> {
+  document.getElementById('overlay').className = 'overlay-hide';
+  renderApp(store);
+};
+
+const isReady = ()=> {
+  const state = store.getState();
+  if (Object.keys(state.userDetails.data).length > 0 && Object.keys(state.localeMessages.data).length > 0) {
+    init();
+  }
+};
+
 store.dispatch(getUser());
 store.dispatch(getLocaleMessages());
 
-renderApp(store);
+// Render only once initial data is ready
+store.subscribe(isReady);
