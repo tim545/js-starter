@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "init": "npm install -g gulp-cli gulp-server-livereload browserify && npm install && gulp --NODE_ENV=development --verbose",
-    "start": "gulp --NODE_ENV=development"
+    "start": "gulp --NODE_ENV=development",
+    "test": "jest --coverage --config jestConfig.json"
   },
   "author": "Tim Freedman",
   "license": "ISC",
