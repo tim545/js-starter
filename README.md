@@ -27,7 +27,7 @@ Front-end only stack which uses [GulpJs](gulpjs.com) for task automation, module
 - Twitter Bootstrap
 - Font Awesome
 
-### Instillation
+### Installation
 
 This project requires [NodeJs](https://nodejs.org) and a few NodeJs packages installed globally:
 
@@ -37,8 +37,4 @@ After this install the local dependencies with `npm install`
 
 ### Usage
 
-Copy this repository into a new folder on your computer (exclude the `.git` folder) and start coding!
-
-### Getting Started
-
-Use `npm run init` to install all the dependencies and start the dev server, in the future use `npm start` instead.
+Use `npm start` to compile the src files and start the local development server.
