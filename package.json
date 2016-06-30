@@ -4,7 +4,7 @@
   "description": "Employer dashboard front end app",
   "main": "index.js",
   "scripts": {
-    "init": "npm install -g gulp-cli gulp-server-livereload browserify && npm install && gulp --NODE_ENV=development --verbose",
+    "init": "npm install && gulp --NODE_ENV=development --verbose",
     "start": "gulp --NODE_ENV=development"
   },
   "author": "Tim Freedman",
